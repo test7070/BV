@@ -82,12 +82,12 @@
 			+@a+'^@'+@b+'^@'+@c+'^@'+@d+'^@'+@e+'^@'+@f+'^@'+@g+'^@'+@h+'^@'+'代收貨款有小數點'
 		end
 		else
-		if(isnull((select unit from addr2 where noa=@c),'')not in ('FSD','聯運'))--未開線資料
-		begin
-			set @memo=@memo+(case when len(@memo)>0 then '\r' else '' end)
-			+@a+'^@'+@b+'^@'+@c+'^@'+@d+'^@'+@e+'^@'+@f+'^@'+@g+'^@'+@h+'^@'+isnull((select unit from addr2 where noa=@c),'無郵遞區號')
-		end
-		else
+		--if(isnull((select unit from addr2 where noa=@c),'')not in ('FSD','聯運'))--未開線資料
+		--begin
+		--	set @memo=@memo+(case when len(@memo)>0 then '\r' else '' end)
+		--	+@a+'^@'+@b+'^@'+@c+'^@'+@d+'^@'+@e+'^@'+@f+'^@'+@g+'^@'+@h+'^@'+isnull((select unit from addr2 where noa=@c),'未開線')
+		--end
+		--else
 		begin
 			set @n =  cast((charindex(left(RIGHT(@noa,3),1),@string)-1)*100+cast(RIGHT(@noa,2) as int)+1 as nvarchar)	
 			set @noq = SUBSTRING(@string,floor(@n/100)+1,1)+right('00'+cast(@n%100 as nvarchar),2)
