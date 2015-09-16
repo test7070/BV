@@ -320,6 +320,7 @@
 	                    string+='<td id="transef_boat" align="center" style="width:150px; color:black;">行動電話</td>';
 	                    string+='<td id="transef_atel" align="center" style="width:150px; color:black;">電話</td>';
 	                    string+='<td id="transef_endaddr" align="center" style="color:black;">備註</td>';
+	                    string+='<td id="transef_sender" align="center" style="color:black;">備註</td>';
 	                    string+='<td id="transef_straddr" align="center" style="width:230px; color:black;">商品內容</td>';
 	                    string+='<td id="transef_unit" align="center" style="width:80px; color:black;">審件等級</td>';
 	                    string+='<td id="transef_price" align="center" style="width:120px; color:black;">代收貨款</td>';
@@ -342,6 +343,7 @@
 	                        string+='<td id="transef_boat'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].boat+'</td>';
 	                        string+='<td id="transef_atel'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].atel+'</td>';
 	                        string+='<td id="transef_endaddr'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].endaddr+'</td>';
+	                        string+='<td id="transef_sender'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].sender+'</td>';
 	                        string+='<td id="transef_straddr'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].straddr+'</td>';
 	                        string+='<td id="transef_unit'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].unit+'</td>';
 	                        string+='<td id="transef_price'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].price+'</td>';	                        
