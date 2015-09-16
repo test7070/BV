@@ -77,7 +77,7 @@
 			+@a+'^@'+@b+'^@'+@c+'^@'+@d+'^@'+@e+'^@'+@f+'^@'+@g+'^@'+@h+'^@'+@i+'^@'+@j+'^@'+'代收貨款有英文字'
 		end
 		else
-		if(cast(@h as float)!=cast(cast(@h as float)as int))
+		if(cast(@j as float)!=cast(cast(@j as float)as int))
 		begin
 			set @memo=@memo+(case when len(@memo)>0 then '\r' else '' end)
 			+@a+'^@'+@b+'^@'+@c+'^@'+@d+'^@'+@e+'^@'+@f+'^@'+@g+'^@'+@h+'^@'+'代收貨款有小數點'
@@ -94,7 +94,7 @@
 			set @noq = SUBSTRING(@string,floor(@n/100)+1,1)+right('00'+cast(@n%100 as nvarchar),2)
 			set @noa = @key+REPLACE(@datea,'/','')+@noq
 			
-			set @h=case when @h='' then '0' else @h end 
+			set @j=case when @j='' then '0' else @j end 
 			
 			--產生code97
 			select top 1 @tranordeno=noa,@bcode97=docketno1,@ecode97=docketno2
