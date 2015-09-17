@@ -49,7 +49,7 @@
                 string queryString = @"select datea,trandate,'' --指定配送
 	                                    ,isnull(price,0),accno,[weight],mount,po barcode96
 	                                    ,addressee,atel+'  '+boat,caseend+aaddr --zipcode+addr
-	                                    ,endaddr memo,straddr,''
+	                                    ,straddr,endaddr memo,sender
 	                                    ,custno,comp,boatname barcode97,carno bag
                                     from view_transef
                                     where boatname between @bno and @eno
