@@ -60,30 +60,30 @@
 				switch(t_func) {
 					case 'etc.h96.btnOK':
 						if(result.substr(0,2)=="^@"){//  傳回值前兩碼=^@   要產生96
-                			//104/05/05 96條碼產生方式變動為9712345672>9612345676
-                			var t_code97=$('#txtCode').val();
-                			var t_code96='96'+t_code97.substr(2,7);
-                			//加入檢查碼
-                			t_code96=t_code96+(dec(t_code96)%7);
+							//104/05/05 96條碼產生方式變動為9712345672>9612345676
+							var t_code97=$('#txtCode').val();
+	                		var t_code96='96'+t_code97.substr(2,7);
+	                		//加入檢查碼
+	                		t_code96=t_code96+(dec(t_code96)%7);
 							$('#txtShip').val(t_code96)
-							
+						
 							var t_site=result.split("^@");
 							$('#txtSiteno').val(replaceAll(t_site[1],'<BR>',''));
 							$('#txtSite').val(t_site[2]);
 						}else{
-							$('#txtShip').val('');
+							//$('#txtShip').val('');
 						}
 						etc96=true;
 						btnOk();
 						break;
 					case 'etc.h96':
 						if(result.substr(0,2)=="^@"){//  傳回值前兩碼=^@   要產生96
-                			//104/05/05 96條碼產生方式變動為9712345672>9612345676
-                			if(!emp($('#txtCode').val())){
-	                			var t_code97=$('#txtCode').val();
-	                			var t_code96='96'+t_code97.substr(2,7);
-	                			//加入檢查碼
-	                			t_code96=t_code96+(dec(t_code96)%7);
+							//104/05/05 96條碼產生方式變動為9712345672>9612345676
+							if(!emp($('#txtCode').val())){
+		                		var t_code97=$('#txtCode').val();
+		                		var t_code96='96'+t_code97.substr(2,7);
+		                		//加入檢查碼
+		                		t_code96=t_code96+(dec(t_code96)%7);
 								$('#txtShip').val(t_code96);
 							}
 							
@@ -91,7 +91,7 @@
 							$('#txtSiteno').val(replaceAll(t_site[1],'<BR>',''));
 							$('#txtSite').val(t_site[2]);
 						}else{
-							$('#txtShip').val('');
+							//$('#txtShip').val('');
 						}
 						break;
 					case 'qtxt.query.tboat2':
@@ -151,7 +151,7 @@
 				*/
 				$('#txtBoatname').change(function() {
 					if(!emp($(this).val())){
-						q_func("etc.h96", $(this).val()); //傳回值前兩碼=^@   要產生96
+						//q_func("etc.h96", $(this).val()); //傳回值前兩碼=^@   要產生96
                 		
 						var t_where = "where=^^ charindex(city,'"+$(this).val()+"')>0 and charindex(area,'"+$(this).val()+"')>0 and charindex(road,'"+$(this).val()+"')>0 ^^";
 						q_gt('view_road', t_where, 0, 0, 0, "getzip1");
@@ -209,7 +209,7 @@
                 			//$('#txtBoatname').val(as[0].aaddr);
                 			//$('#txtSiteno').val(as[0].accno);
                 			//$('#txtSite').val(as[0].uccno);
-                			$('#txtShip').val(as[0].po);
+                			//$('#txtShip').val(as[0].po);
                 			//$('#txtMobile').val(as[0].boat);
                 			//$('#txtZip').val(as[0].caseuse);
                 			//$('#txtTotal').val(as[0].price);
@@ -322,10 +322,19 @@
 					return;
 				}
 				
-				if(!emp($('#txtBoatname').val()) && !etc96){
+				//104/09/17 潘'r 只要轉聯運都要產生96條碼
+				if(!emp($('#txtCode').val())){
+		        	var t_code97=$('#txtCode').val();
+		        	var t_code96='96'+t_code97.substr(2,7);
+					//加入檢查碼
+					t_code96=t_code96+(dec(t_code96)%7);
+					$('#txtShip').val(t_code96);
+				}
+				
+				/*if(!emp($('#txtBoatname').val()) && !etc96){
 					q_func("etc.h96.btnOK", $('#txtBoatname').val()); //傳回值前兩碼=^@   要產生96
 					return;
-				}
+				}*/
 				
 				etc96=false;
 				
