@@ -43,21 +43,22 @@ select
 replace(@ydatea,'/','')--發送日
 ,a.boatname--貨件編號
 ,a.custno--客戶代號
-,''--出貨人
-,''--出貨電話
-,''--出貨地址
-,''--發送站
+,b.comp--出貨人
+,b.tel--出貨電話
+,b.addr_comp--出貨地址
+,b.zip_fact--發送站
 ,a.addressee--收貨人
-,a.boat--收貨人電話
+,a.atel--收貨人電話
 ,a.aaddr--收貨人地址
-,a.accno--到著站
-,''--傳票區分
-,''--商品種類
+,isnull((select top 1 code from addr3 where noa=a.accno),'')--到著站--換成全碼
+,'11'--傳票區分
+,'2'--商品種類
 ,''--備註
-,replace(dbo.getComma(price,0),',','')--代收貨款金額
-,replace(dbo.getComma(mount,0),',','')--件數
-,replace(dbo.getComma(weight,0),',','')--重量
-,''--資料狀況註記
+--,replace(dbo.getComma(price,0),',','')--代收貨款金額
+--,replace(dbo.getComma(mount,0),',','')--件數
+--,replace(dbo.getComma(weight,0),',','')--重量
+,'0','1',(case when carno='9' then '0' else carno end)
+,'A'--資料狀況註記
 from view_transef a
 where isnull(a.boatname,'')!='' and isnull(a.mon2,'')='' --and isnull(a.po,'')!='' 全部97碼
 

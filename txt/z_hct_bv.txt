@@ -40,7 +40,7 @@ declare @result table(
 insert @result
 select '0'
 ,ROW_NUMBER() over (order by  case when @t_order='2' then a.po when @t_order='1' then (case when isnull(b.comp,'')!='' then '1' else '0' end) else (case when isnull(b.comp,'')!='' then '1' else '0' end) end,a.po)
-,a.po
+,a.boatname
 ,case when isnull(b.comp,'')!='' then '配達完成' else '未收貨' end
 ,case when isnull(b.comp,'')!='' then '是' else '否' end
 ,a.comp,a.addressee,a.atel,a.aaddr
@@ -60,6 +60,6 @@ begin
 	select '1',(select top 1 comp from cust where noa=@t_userno)
 end
 
-select '<a href="http://www.hct.com.tw">'+cast(recno as nvarchar(10))+'<a> ' xrecno,* 
+select '<a href="https://www.hct.com.tw/fsdex/search_goods_result.aspx">'+cast(recno as nvarchar(10))+'<a> ' xrecno,* 
 from @result a order by a.recno
 ;
