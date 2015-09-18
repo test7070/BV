@@ -65,7 +65,7 @@
 	 select isnull(a,''),isnull(b,''),left(isnull(c,''),case when charindex('.',c)=0 then len(c) else charindex('.',c)-1 end)
 	 ,isnull(d,''),isnull(e,''),isnull(f,''),isnull(g,'')--,isnull(h,'0')
 	 ,isnull(h,''),isnull(i,''),isnull(j,'0')
-	from ztmpxls where a!='來源表單編號' and isnull(a,'')!='' order by noa
+	from ztmpxls where a!='來源表單編號' and isnull(a,'')!='' order by cast(noa as int)
 	open cursor_table
 	fetch next from cursor_table
 	into @a,@b,@c,@d,@e,@f,@g,@h,@i,@j
