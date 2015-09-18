@@ -198,7 +198,7 @@
 						break;
 					case 'GetMax97code':
 						var as = _q_appendData("tranorde", "", true);
-						var maxcode='9700399995',endcode='9700399995';
+						var maxcode='9700400006',endcode='9700400006';
 						if (as[0] != undefined){
 							var maxcode=maxcode<as[0].docketno2?as[0].docketno2:maxcode;
 							maxcode='97'+('0000000'+(dec(maxcode.slice(-8).substr(0,7))+1)).slice(-7);
