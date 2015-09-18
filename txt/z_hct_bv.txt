@@ -46,8 +46,9 @@ select '0'
 ,a.comp,a.addressee,a.atel,a.aaddr
 from view_transef a left join borrc b 
 on (case when left(b.comp,2)='97' then a.boatname else a.po end)=b.comp
-where a.po!='' --需配送
-and (@t_out='0' or a.custno=@t_userno )
+where --a.po!='' --需配送
+--and 
+(@t_out='0' or a.custno=@t_userno )
 and (@t_out='1' or a.custno between @t_bcustno and @t_ecustno  )
 and (a.trandate between @t_bdate and @t_edate) 
 and (len(@t_noa)=0 or (case when left(b.comp,2)='97' then a.boatname else a.po end)= @t_noa)
