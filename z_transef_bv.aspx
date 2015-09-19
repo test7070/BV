@@ -139,7 +139,7 @@
 				});
 				
 				$('#qReport').click(function(){
-					if($('#qReport').data('info').radioIndex==0){
+					if($('#qReport').data('info').radioIndex==0 || $('#qReport').data('info').radioIndex==2){
 						$('.prt').hide();
 						$('.vcc').show();
 						$('.download').show();
@@ -158,6 +158,15 @@
 					}
 					if($('#qReport div div').text().indexOf('EDI託運單')>-1)
 						$('#qReport div div').eq(delete_report).hide();
+						
+					delete_report=999;
+					for(var i=0;i<$('#qReport').data().info.reportData.length;i++){
+						if($('#qReport').data().info.reportData[i].report=='z_transef_bv03')
+							delete_report=i;
+					}
+					
+					if($('#qReport div div').text().indexOf('EDI託運單(單張)')>-1)
+						$('#qReport div div').eq(delete_report).hide();			
 					
 					$('#qReport div div .radio').last().removeClass('nonselect').addClass('select').click();
 					if(q_getHref()[1]!=undefined || q_getHref()[1]!=''){
@@ -173,6 +182,15 @@
 					}
 					if($('#qReport div div').text().indexOf('託運總表')>-1)
 						$('#qReport div div').eq(delete_report).hide();
+						
+					delete_report=999;
+					for(var i=0;i<$('#qReport').data().info.reportData.length;i++){
+						if($('#qReport').data().info.reportData[i].report=='z_transef_bv03')
+							delete_report=i;
+					}
+					
+					if($('#qReport div div').text().indexOf('EDI託運單(單張)')>-1)
+						$('#qReport div div').eq(delete_report).hide();		
 				}
             }
 
