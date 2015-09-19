@@ -103,8 +103,10 @@
                 				window.open("./pdf_edi.aspx?bno="+$('#txtBnoa').val()+"&eno="+$('#txtEnoa').val()+"&str="+$('#Str .cmb').val()+"&db="+q_db);
                 				$('.vcc_chk').each(function(index) {
 									var n=$(this).attr('id').replace('vcc_chk','')
-									$('#vcc_chk'+n).prop('checked',false).attr('disabled','disabled');
-									$('#vcc_print'+n).text('已列印');
+									if($('#vcc_chk'+n).prop('checked')){
+										$('#vcc_print'+n).text('已列印');
+										$('#vcc_chk'+n).prop('checked',false).attr('disabled','disabled');
+									}
 								});
                 			}else
                 				alert('條碼範圍不得超逾300張!!!');
