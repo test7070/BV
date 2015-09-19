@@ -103,10 +103,8 @@
                 				window.open("./pdf_edi.aspx?bno="+$('#txtBnoa').val()+"&eno="+$('#txtEnoa').val()+"&str="+$('#Str .cmb').val()+"&db="+q_db);
                 				$('.vcc_chk').each(function(index) {
 									var n=$(this).attr('id').replace('vcc_chk','')
-									if($('#vcc_chk'+n).prop('checked')){
-										$('#vcc_print'+n).text('已列印');
-										$('#vcc_chk'+n).prop('checked',false).attr('disabled','disabled');
-									}
+									$('#vcc_chk'+n).prop('checked',false).attr('disabled','disabled');
+									$('#vcc_print'+n).text('已列印');
 								});
                 			}else
                 				alert('條碼範圍不得超逾300張!!!');
@@ -151,19 +149,23 @@
 				});
 				$('#btnOk').hide();
 				if(window.parent.q_name == 'transef_edi_bv'){
-					//只有顯示託運總表總表
 					var delete_report=999;
 					for(var i=0;i<$('#qReport').data().info.reportData.length;i++){
-						if($('#qReport').data().info.reportData[i].report!='z_transef_bv02'){
+						if($('#qReport').data().info.reportData[i].report=='z_transef_bv01')
 							delete_report=i;
-							$('#qReport div div').eq(delete_report).hide();
-							delete_report=999;
-						}else{
-							delete_report=i;
-							$('#qReport div div .radio').eq(delete_report).removeClass('nonselect').addClass('select').click();
-						}
 					}
-
+					if($('#qReport div div').text().indexOf('EDI託運單')>-1)
+						$('#qReport div div').eq(delete_report).hide();
+						
+					delete_report=999;
+					for(var i=0;i<$('#qReport').data().info.reportData.length;i++){
+						if($('#qReport').data().info.reportData[i].report=='z_transef_bv03')
+							delete_report=i;
+					}				
+					if($('#qReport div div').text().indexOf('EDI託運單(單張)')>-1)
+						$('#qReport div div').eq(delete_report).hide();			
+					
+					$('#qReport div div .radio').last().removeClass('nonselect').addClass('select').click();
 					if(q_getHref()[1]!=undefined || q_getHref()[1]!=''){
 						$('#qReport').data().info.options[0].value=q_getHref()[1];
 						t_where="where=^^noa='"+q_getHref()[1]+"' order by datea desc,custno^^";
@@ -178,6 +180,14 @@
 					if($('#qReport div div').text().indexOf('託運總表')>-1)
 						$('#qReport div div').eq(delete_report).hide();
 						
+					delete_report=999;
+					for(var i=0;i<$('#qReport').data().info.reportData.length;i++){
+						if($('#qReport').data().info.reportData[i].report=='z_transef_bv03')
+							delete_report=i;
+					}
+					
+					if($('#qReport div div').text().indexOf('EDI託運單(單張)')>-1)
+						$('#qReport div div').eq(delete_report).hide();		
 				}
             }
 
