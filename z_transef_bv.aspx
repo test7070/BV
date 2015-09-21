@@ -100,7 +100,11 @@
                 		&& dec($('#txtEnoa').val().substr(0,9))%7 == dec($('#txtEnoa').val().substr(-1))
                 		){
                 			if(Math.abs(q_sub(dec($('#txtBnoa').val().substr(-8).substr(0,7)),dec($('#txtEnoa').val().substr(-8).substr(0,7))))<300){
-                				window.open("./pdf_edi.aspx?bno="+$('#txtBnoa').val()+"&eno="+$('#txtEnoa').val()+"&str="+$('#Str .cmb').val()+"&db="+q_db);
+                				if($('#qReport').data('info').radioIndex==0)
+                					window.open("./pdf_edi.aspx?bno="+$('#txtBnoa').val()+"&eno="+$('#txtEnoa').val()+"&str="+$('#Str .cmb').val()+"&db="+q_db);
+                				if( $('#qReport').data('info').radioIndex==2)
+                					window.open("./pdf_edi2.aspx?bno="+$('#txtBnoa').val()+"&eno="+$('#txtEnoa').val()+"&str="+$('#Str .cmb').val()+"&db="+q_db);
+                				
                 				$('.vcc_chk').each(function(index) {
 									var n=$(this).attr('id').replace('vcc_chk','')
 									if($('#vcc_chk'+n).prop('checked')){
