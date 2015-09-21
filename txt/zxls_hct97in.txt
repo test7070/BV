@@ -59,7 +59,7 @@ replace(@ydatea,'/','')--發送日
 --,replace(dbo.getComma(weight,0),',','')--重量
 ,'0','1',(case when carno='9' then '0' else carno end)
 ,'A'--資料狀況註記
-from view_transef a
+from view_transef a left join cust b on a.custno=b.noa
 where isnull(a.boatname,'')!='' and isnull(a.mon2,'')='' --and isnull(a.po,'')!='' 全部97碼
 
 -------------------------------------------------------------------------------------------------------------------
