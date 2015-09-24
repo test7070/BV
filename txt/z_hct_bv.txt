@@ -60,6 +60,8 @@ begin
 	select '1',(select top 1 comp from cust where noa=@t_userno)
 end
 
-select '<a href="https://www.hct.com.tw/fsdex/search_goods_result.aspx">'+cast(recno as nvarchar(10))+'<a> ' xrecno,* 
+select recno xrecno
+,'<a href="https://www.hct.com.tw/fsdex/search_goods_result.aspx" target="_blank" >'+noa+'<a> ' ynoa
+,* 
 from @result a order by a.recno
 ;
