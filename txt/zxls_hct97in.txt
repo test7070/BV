@@ -46,9 +46,9 @@ replace(@ydatea,'/','')--發送日
 ,b.comp--出貨人
 ,b.tel--出貨電話
 ,b.addr_comp--出貨地址
-,b.zip_fact--發送站
+,isnull((select top 1 code from addr3 where noa=b.zip_fact),'')zip_fact--發送站
 ,a.addressee--收貨人
-,a.atel--收貨人電話
+,dbo.get_num(a.atel) atel--收貨人電話
 ,a.aaddr--收貨人地址
 ,isnull((select top 1 code from addr3 where noa=a.accno),'')--到著站--換成全碼
 ,'11'--傳票區分
