@@ -41,17 +41,16 @@ insert @result
 select '0'
 ,ROW_NUMBER() over (order by  case when @t_order='2' then a.po when @t_order='1' then (case when isnull(b.comp,'')!='' then '1' else '0' end) else (case when isnull(b.comp,'')!='' then '1' else '0' end) end,a.po)
 ,a.boatname
-,case when isnull(b.comp,'')!='' then '配達完成' else '未收貨' end
-,case when isnull(b.comp,'')!='' then '是' else '否' end
+,case when isnull(b.comp,'')='2' then '卸集完成' when isnull(b.comp,'')='3' then '發送完成' when isnull(b.comp,'')='4' then '到著完成' when isnull(b.comp,'')='5' then '配送完成' when isnull(b.comp,'')='6' then '配達完成' else '未收貨' end
+,case when isnull(b.comp,'')='6' then '是'+isnull(b.memo,'') else '否' end
 ,a.comp,a.addressee,a.atel,a.aaddr
-from view_transef a left join borrc b 
-on (case when left(b.comp,2)='97' then a.boatname else a.po end)=b.comp
-where --a.po!='' --需配送
---and 
+from view_transef a 
+outer apply(select * from borrc where (case when left(a.boatname,2)='97' then a.boatname else a.po end)=comp) b
+where --a.po!='' --需配送 --and 
 (@t_out='0' or a.custno=@t_userno )
 and (@t_out='1' or a.custno between @t_bcustno and @t_ecustno  )
 and (a.trandate between @t_bdate and @t_edate) 
-and (len(@t_noa)=0 or (case when left(b.comp,2)='97' then a.boatname else a.po end)= @t_noa)
+and (len(@t_noa)=0 or (case when left(a.boatname,2)='97' then a.boatname else a.po end)= @t_noa)
 order by  case when @t_order='2' then a.po when @t_order='1' then (case when isnull(b.comp,'')!='' then '1' else '0' end) else (case when isnull(b.comp,'')!='' then '1' else '0' end) end,a.po
 
 if((select count(*) from @result)=0)

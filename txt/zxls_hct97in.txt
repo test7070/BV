@@ -44,7 +44,7 @@ replace(@ydatea,'/','')--發送日
 ,a.boatname--貨件編號
 ,a.custno--客戶代號
 ,b.comp--出貨人
-,b.tel--出貨電話
+,dbo.get_num(b.tel) tel--出貨電話
 ,b.addr_comp--出貨地址
 ,isnull((select top 1 code from addr3 where noa=b.zip_fact),'')zip_fact--發送站
 ,a.addressee--收貨人
