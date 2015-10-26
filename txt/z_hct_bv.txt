@@ -41,8 +41,24 @@ insert @result
 select '0'
 ,ROW_NUMBER() over (order by  case when @t_order='2' then a.po when @t_order='1' then (case when isnull(b.comp,'')!='' then '1' else '0' end) else (case when isnull(b.comp,'')!='' then '1' else '0' end) end,a.po)
 ,a.boatname
-,case when isnull(b.custno,'')='2' then '已卸集' when isnull(b.custno,'')='3' then '已發送' when isnull(b.custno,'')='4' then '已到著' when isnull(b.custno,'')='5' then '已配送' when isnull(b.custno,'')='6' then '已配達' else '未收貨' end
-,case when isnull(b.custno,'')='6' then '是'+isnull(b.memo,'') else '否' end
+,case when isnull(b.custno,'')='2' then '已收貨' 
+when isnull(b.custno,'')='3' then '運輸途中' 
+when isnull(b.custno,'')='4' then '運輸途中' 
+when isnull(b.custno,'')='5' then '配送中' 
+when isnull(b.custno,'')='6' and left(b.memo,1)='0' then '簽單留置'
+when isnull(b.custno,'')='6' and left(b.memo,1)='1' then '客戶不在'
+when isnull(b.custno,'')='6' and left(b.memo,1)='2' then '約定再配'
+when isnull(b.custno,'')='6' and left(b.memo,1)='3' then '配達'
+when isnull(b.custno,'')='6' and left(b.memo,1)='4' then '拒收'
+when isnull(b.custno,'')='6' and left(b.memo,1)='5' then '地址錯誤'
+when isnull(b.custno,'')='6' and left(b.memo,1)='6' then '查無此人'
+when isnull(b.custno,'')='6' and left(b.memo,1)='7' then '配達'
+when isnull(b.custno,'')='6' and left(b.memo,1)='8' then '配達'
+when isnull(b.custno,'')='6' and left(b.memo,1)='9' then '配達'
+when isnull(b.custno,'')='6' and left(b.memo,1)='A' then '店取收回'
+when isnull(b.custno,'')='6' and left(b.memo,1)='B' then '店取收回異常'
+else '未收貨' end
+,case when isnull(b.custno,'')='6' then '是' else '否' end
 ,a.comp,a.addressee,a.atel,a.aaddr
 from view_transef a 
 outer apply(select top 1 * from borrc where (case when left(a.boatname,2)='97' then a.boatname else a.po end)=comp order by noa desc) b
