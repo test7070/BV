@@ -78,6 +78,7 @@ end
 select recno xrecno
 --,'<a href="./href2fsdex.aspx?estr='+noa+'" target="_blank" >'+noa+'<a> ' ynoa
 ,'<a href="https://www.hct.com.tw/fsdex/search_goods_result.aspx" target="_blank" >'+noa+'<a> ' ynoa
+,(select top 1 comp from cust where noa=@t_userno) xcomp
 ,* 
 from @result a order by a.recno
 ;
