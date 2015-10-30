@@ -578,6 +578,14 @@
 						<td><span> </span><a class="lbl">宅配員</a></td>
 						<td><input type="text" id="txtWorker2" class="txt c1 "/></td>
 					</tr>
+					<tr>
+						<td colspan="4">
+							<a style="color: red;">　　　※注意事項: </a><BR>
+    						<a>　　　　　當日取件: 下午3點30分前通知</a><BR>
+    						<a>　　　　　隔日取件: 下午3點30分後通知</a><BR>
+ 							<a style="color: red;">　　　※如已過當日取件時效,請聯絡地區主任當日是否取件。</a>
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>
