@@ -61,7 +61,7 @@ else '未收貨' end
 ,case when isnull(b.custno,'')='6' then '是' else '否' end
 ,a.comp,a.addressee,a.atel,a.aaddr
 from view_transef a 
-outer apply(select top 1 * from borrc where (case when left(a.boatname,2)='97' then a.boatname else a.po end)=comp order by noa desc) b
+outer apply(select top 1 * from borrc where a.boatname=comp or a.po=comp order by noa desc) b --out的CSV 會有96和97碼
 where --a.po!='' --需配送 --and 
 (@t_out='0' or a.custno=@t_userno )
 and (@t_out='1' or a.custno between @t_bcustno and @t_ecustno  )
