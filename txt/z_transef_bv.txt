@@ -113,7 +113,8 @@ z_transef_bv02:--z_transef_bv02
 	
 	insert @tmp
 	select '0',a.datea,a.custno,case when isnull(a.nick,'')!='' then a.nick else a.comp end
-	,a.boatname,a.accno,a.uccno,a.addressee,a.atel,a.mount,a.traceno,a.aaddr,a.price,a.endaddr,a.straddr,a.weight,0
+	,a.boatname,a.accno,a.uccno,a.addressee,case when isnull(a.atel,'')!='' then a.atel else a.boat end 
+	,a.mount,a.traceno,a.aaddr,a.price,a.endaddr,a.straddr,a.weight,0
 	,b.datea,case when b.cno!='' then '已列印日：'+b.cno+' '+b.acomp else '' end
 	from view_transef a left join view_vcc b on a.treno=b.noa
 	where treno=@t_xnoa
