@@ -59,7 +59,7 @@ when isnull(b.custno,'')='6' and left(b.memo,1)='A' then '店取收回'
 when isnull(b.custno,'')='6' and left(b.memo,1)='B' then '店取收回異常'
 else '未收貨' end
 ,case when isnull(b.custno,'')='6' then '是' else '否' end
-,a.comp,a.addressee,a.atel,a.aaddr
+,a.comp,a.addressee,case when isnull(a.atel,'')!='' then a.atel else a.boat end,a.aaddr
 from view_transef a 
 outer apply(select top 1 * from borrc where a.boatname=comp or a.po=comp order by noa desc) b --out的CSV 會有96和97碼
 where --a.po!='' --需配送 --and 
