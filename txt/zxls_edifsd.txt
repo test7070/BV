@@ -97,7 +97,7 @@
 			set @j=case when @j='' then '0' else @j end 
 			
 			--產生code97
-			select top 1 @tranordeno=noa,@bcode97=docketno1,@ecode97=docketno2
+			select top 1 @tranordeno=noa,@bcode97=docketno1,@ecode97=docketno2,@max_code97=boatname
 			from view_tranorde 
 			where enda!=1 and left(containertype,3)='edi' 
 			and custno=@custno 
@@ -108,10 +108,13 @@
 			if(@ecode97 is null) set @ecode97='0000000000'
 			if(@tranordeno is null) set @tranordeno=''
 			
-			select @max_code97=MAX(boatname) from view_transef where (boatname between @bcode97 and @ecode97)
+			if(isnull(@max_code97,'')<isnull((select MAX(boatname) from view_transef where (boatname between @bcode97 and @ecode97)),''))
+			begin
+				select @max_code97=MAX(boatname) from view_transef where (boatname between @bcode97 and @ecode97)
+			end
 			 
 			--預設格式97+流水號7碼+檢查碼mod 7
-			if (@max_code97 is null and @bcode97!='0000000000')--沒有最大97碼
+			if (isnull(@max_code97,'')='' and @bcode97!='0000000000')--沒有最大97碼
 			begin
 				set @code97=@bcode97
 			end
@@ -151,13 +154,15 @@
 			
 			select @oaccy=isnull(accy,'') from view_tranorde where noa=@tranordeno
 		
-			if(@tranordeno!='' )
+			if(@tranordeno!='' and @code97!='')
 			begin
 				EXEC("update tranorde"+@oaccy+" 
 				set boat=(select count(*) from view_transef where traceno='"+@tranordeno+"' and isnull(trandate,'')!='')
 				,port=isnull(mount,0)-(select count(*) from view_transef where traceno='"+@tranordeno+"' and isnull(trandate,'')!='')
-				,enda=case when isnull(mount,0)=(select count(*) from view_transef where traceno='"+@tranordeno+"' and isnull(trandate,'')!='') then 1 else 0 end
+				,enda=case when '"+@ecode97+"'='"+@code97+"' then 1 else 0 end
+				,boatname='"+@code97+"'
 				where noa='"+@tranordeno+"'")
+				--,enda=case when isnull(mount,0)=(select count(*) from view_transef where traceno='"+@tranordeno+"' and isnull(trandate,'')!='') then 1 else 0 end
 			end
 		end
 		
