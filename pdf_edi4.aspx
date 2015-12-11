@@ -96,13 +96,10 @@
                 barcode.Add(pa);
             }
             //-----PDF--------------------------------------------------------------------------------------------------
-            int[,] positions = new int[6, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } };
+			int[,] positions = new int[6, 2] { { 0, 236 }, { 0, 5 }, { 0, 236 }, { 0, 5 }, { 0, 236 }, { 0, 5 } };
 
-            //var doc1 = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 5, 5, 0, 0);
-            //iTextSharp.text.pdf.PdfWriter pdfWriter = iTextSharp.text.pdf.PdfWriter.GetInstance(doc1, stream);
-            
-            //紙張 9*9
-            var doc1 = new iTextSharp.text.Document(new iTextSharp.text.Rectangle(283, 283), 5, 5, 0, 0);
+            //紙張 10cm*15cm
+            var doc1 = new iTextSharp.text.Document(new iTextSharp.text.Rectangle(314, 471), 0, 0, 0, 0);
             iTextSharp.text.pdf.PdfWriter pdfWriter = iTextSharp.text.pdf.PdfWriter.GetInstance(doc1, stream);
             
             //font
@@ -116,128 +113,172 @@
                 cb.SetColorFill(iTextSharp.text.BaseColor.RED);
                 cb.BeginText();
                 cb.SetFontAndSize(bfChinese, 50);
-                cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "無資料", 60, 125, 0);
+                cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "無資料", 20, 500, 0);
                 cb.EndText();
             }
             else
-            {
-                for (int i = 0; i < barcode.Count; i++)
-                {
-                    if (i != 0)
+            {	int j = 0;//控制資料
+            	int k = 0;
+                for (int i = 0; i < barcode.Count * 2; i++)
+                {	k = 306;
+                    if ((str + i) != 0 && (str + i) % 2 == 0)
                     {
                         //Insert page
                         doc1.NewPage();
                     }
+                    // if (i != 0)
+                    // {
+                        // //Insert page
+                        // doc1.NewPage();
+                    // }
+                    
                     cb.SetColorStroke(iTextSharp.text.BaseColor.BLACK);
                     cb.SetLineWidth(1);
-                    //橫線
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 277);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 277);
-                    cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 247);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 100, positions[(str + i) % 6, 1] + 247);
-                    cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 227);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 100, positions[(str + i) % 6, 1] + 227);
-                    cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 207);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 207);
-                    cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 167);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 167);
-                    cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 127);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 127);
-                    cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 87);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 87);
-                    cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 47);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 47);
-                    cb.Stroke();
+                    //橫線                  
+                  	cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 212);
+	                cb.LineTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 212);
+	                cb.Stroke();
+	                cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 193);
+	                cb.LineTo(positions[(str + i) % 6, 0] + 135, positions[(str + i) % 6, 1] + 193);
+	                cb.Stroke();
+	                cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 175);
+	                cb.LineTo(positions[(str + i) % 6, 0] + 135, positions[(str + i) % 6, 1] + 175);
+	                cb.Stroke();
+	                cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 164);
+	                cb.LineTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 164);
+	                cb.Stroke();
+	                cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 132);
+	                cb.LineTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 132);
+	                cb.Stroke();
+	                if(i % 2 == 0){
+	                	cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 101);
+		                cb.LineTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 101);
+		                cb.Stroke();
+		                cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 70);
+		                cb.LineTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 70);
+		                cb.Stroke();
+	                }else{
+	                	cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 101);
+		                cb.LineTo(positions[(str + i) % 6, 0] + 230, positions[(str + i) % 6, 1] + 101);
+		                cb.Stroke();
+		                cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 70);
+		                cb.LineTo(positions[(str + i) % 6, 0] + 230, positions[(str + i) % 6, 1] + 70);
+		                cb.Stroke();
+	                }            
+	                cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 39);
+	                cb.LineTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 39);
+	                cb.Stroke();
+	                cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 7);
+	                cb.LineTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 7);
+	                cb.Stroke();                                    
                     //直線
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 277);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 5, positions[(str + i) % 6, 1] + 47);
+                    cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 212);
+                    cb.LineTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 7);
                     cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 50, positions[(str + i) % 6, 1] + 277);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 50, positions[(str + i) % 6, 1] + 167);
+                    cb.MoveTo(positions[(str + i) % 6, 0] + 80, positions[(str + i) % 6, 1] + 212);
+                    cb.LineTo(positions[(str + i) % 6, 0] + 80, positions[(str + i) % 6, 1] + 133);
                     cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 100, positions[(str + i) % 6, 1] + 277);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 100, positions[(str + i) % 6, 1] + 207);
+                    cb.MoveTo(positions[(str + i) % 6, 0] + 135, positions[(str + i) % 6, 1] + 212);
+                    cb.LineTo(positions[(str + i) % 6, 0] + 135, positions[(str + i) % 6, 1] + 133);
                     cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 21, positions[(str + i) % 6, 1] + 167);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 21, positions[(str + i) % 6, 1] + 47);
+                    cb.MoveTo(positions[(str + i) % 6, 0] + 20, positions[(str + i) % 6, 1] + 133);
+                    cb.LineTo(positions[(str + i) % 6, 0] + 20, positions[(str + i) % 6, 1] + 40);
                     cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 277);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 207);
+                    cb.MoveTo(positions[(str + i) % 6, 0] + 80, positions[(str + i) % 6, 1] + 40);
+                    cb.LineTo(positions[(str + i) % 6, 0] + 80, positions[(str + i) % 6, 1] + 7);
                     cb.Stroke();
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 167);
-                    cb.LineTo(positions[(str + i) % 6, 0] + 265, positions[(str + i) % 6, 1] + 47);
-                    cb.Stroke();
+                    if(i % 2 != 0){
+                    	cb.MoveTo(positions[(str + i) % 6, 0] + 230, positions[(str + i) % 6, 1] + 133);
+	                    cb.LineTo(positions[(str + i) % 6, 0] + 230, positions[(str + i) % 6, 1] + 39);
+	                    cb.Stroke();
+	                    cb.MoveTo(positions[(str + i) % 6, 0] + 244, positions[(str + i) % 6, 1] + 133);
+	                    cb.LineTo(positions[(str + i) % 6, 0] + 244, positions[(str + i) % 6, 1] + 39);
+	                    cb.Stroke();
+                    }                                       
+                    cb.MoveTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 212);
+	                cb.LineTo(positions[(str + i) % 6, 0] + 306, positions[(str + i) % 6, 1] + 7);
+	                cb.Stroke();
+
                     //TEXT
                     cb.SetColorFill(iTextSharp.text.BaseColor.BLACK);
                     cb.BeginText();
-                    cb.SetFontAndSize(bfChinese, 12);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "指  定", positions[(str + i) % 6, 0] + 13, positions[(str + i) % 6, 1] + 263, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "配  送", positions[(str + i) % 6, 0] + 13, positions[(str + i) % 6, 1] + 250, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "代收款", positions[(str + i) % 6, 0] + 9, positions[(str + i) % 6, 1] + 232, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "重  量", positions[(str + i) % 6, 0] + 13, positions[(str + i) % 6, 1] + 212, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "總件數", positions[(str + i) % 6, 0] + 57, positions[(str + i) % 6, 1] + 212, 0);
+                    cb.SetFontAndSize(bfChinese, 8);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "指              定", positions[(str + i) % 6, 0] + 22, positions[(str + i) % 6, 1] + 204, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "配              送", positions[(str + i) % 6, 0] + 22, positions[(str + i) % 6, 1] + 195, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "代              收", positions[(str + i) % 6, 0] + 22, positions[(str + i) % 6, 1] + 185, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "金              額", positions[(str + i) % 6, 0] + 22, positions[(str + i) % 6, 1] + 177, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "重              量", positions[(str + i) % 6, 0] + 22, positions[(str + i) % 6, 1] + 166, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "總   件   數", positions[(str + i) % 6, 0] + 90, positions[(str + i) % 6, 1] + 166, 0);
 
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "收", positions[(str + i) % 6, 0] + 7, positions[(str + i) % 6, 1] + 155, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "貨", positions[(str + i) % 6, 0] + 7, positions[(str + i) % 6, 1] + 142, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "人", positions[(str + i) % 6, 0] + 7, positions[(str + i) % 6, 1] + 130, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "備", positions[(str + i) % 6, 0] + 7, positions[(str + i) % 6, 1] + 112, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "註", positions[(str + i) % 6, 0] + 7, positions[(str + i) % 6, 1] + 92, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "寄", positions[(str + i) % 6, 0] + 7, positions[(str + i) % 6, 1] + 74, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "貨", positions[(str + i) % 6, 0] + 7, positions[(str + i) % 6, 1] + 62, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "人", positions[(str + i) % 6, 0] + 7, positions[(str + i) % 6, 1] + 50, 0);
-
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "收", positions[(str + i) % 6, 0] + 10, positions[(str + i) % 6, 1] + 123, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "貨", positions[(str + i) % 6, 0] + 10, positions[(str + i) % 6, 1] + 113, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "人", positions[(str + i) % 6, 0] + 10, positions[(str + i) % 6, 1] + 104, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "備", positions[(str + i) % 6, 0] + 10, positions[(str + i) % 6, 1] + 92, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "註", positions[(str + i) % 6, 0] + 10, positions[(str + i) % 6, 1] + 73, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "寄", positions[(str + i) % 6, 0] + 10, positions[(str + i) % 6, 1] + 61, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "貨", positions[(str + i) % 6, 0] + 10, positions[(str + i) % 6, 1] + 51, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "人", positions[(str + i) % 6, 0] + 10, positions[(str + i) % 6, 1] + 42, 0);
+					
+					if(i % 2 != 0){
+						cb.SetFontAndSize(bfChinese, 11);
+						cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "客", positions[(str + i) % 6, 0] + 231, positions[(str + i) % 6, 1] + 114, 0);
+	                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "戶", positions[(str + i) % 6, 0] + 231, positions[(str + i) % 6, 1] + 98, 0);
+	                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "簽", positions[(str + i) % 6, 0] + 231, positions[(str + i) % 6, 1] + 81, 0);
+	                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "收", positions[(str + i) % 6, 0] + 231, positions[(str + i) % 6, 1] + 65, 0);
+	                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, "欄", positions[(str + i) % 6, 0] + 231, positions[(str + i) % 6, 1] + 49, 0);
+					}
+					
+					//DATA
+					if(i % 2 == 0) j = i / 2;
+					
                     cb.SetColorFill(iTextSharp.text.BaseColor.BLUE);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_RIGHT, ((Para)barcode[i]).s2.ToString(), positions[(str + i) % 6, 0] + 95, positions[(str + i) % 6, 1] + 232, 0);
+                    cb.SetFontAndSize(bfChinese, 8);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_RIGHT, ((Para)barcode[j]).s2.ToString(), positions[(str + i) % 6, 0] + 133, positions[(str + i) % 6, 1] + 180, 0);
                     //cb.SetFontAndSize(bfChinese, 16);
                     //cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_RIGHT, ((Para)barcode[i]).weight.ToString(), positions[(str + i) % 6, 0] + 38, positions[(str + i) % 6, 1] + 175, 0);
                     //cb.SetFontAndSize(bfChinese, 12);
                     //cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_RIGHT, "KG", positions[(str + i) % 6, 0] + 55, positions[(str + i) % 6, 1] + 175, 0);
-                    cb.SetFontAndSize(bfChinese, 16);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_RIGHT, ((Para)barcode[i]).count.ToString(), positions[(str + i) % 6, 0] + 80, positions[(str + i) % 6, 1] + 182, 0);
-                    cb.SetFontAndSize(bfNumber, 50);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_CENTER, ((Para)barcode[i]).s3, positions[(str + i) % 6, 0] + 193, positions[(str + i) % 6, 1] + 225, 0);
+                    cb.SetFontAndSize(bfChinese, 10);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_RIGHT, ((Para)barcode[j]).count.ToString(), positions[(str + i) % 6, 0] + 133, positions[(str + i) % 6, 1] + 143, 0);
+                    cb.SetFontAndSize(bfNumber, 45);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_CENTER, ((Para)barcode[j]).s3, positions[(str + i) % 6, 0] + 218, positions[(str + i) % 6, 1] + 171, 0);
+                    
+
                     cb.SetFontAndSize(bfChinese, 8);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).barcode96, positions[(str + i) % 6, 0] + 155, positions[(str + i) % 6, 1] + 170, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).barcode97, positions[(str + i) % 6, 0] + 155, positions[(str + i) % 6, 1] + 10, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).addressee_line1, positions[(str + i) % 6, 0] + 24, positions[(str + i) % 6, 1] + 123, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).addressee_line2, positions[(str + i) % 6, 0] + 24, positions[(str + i) % 6, 1] + 113, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).addressee_line3, positions[(str + i) % 6, 0] + 24, positions[(str + i) % 6, 1] + 104, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).memo_line1, positions[(str + i) % 6, 0] + 24, positions[(str + i) % 6, 1] + 92, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).memo_line2, positions[(str + i) % 6, 0] + 24, positions[(str + i) % 6, 1] + 83, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).memo_line3, positions[(str + i) % 6, 0] + 24, positions[(str + i) % 6, 1] + 73, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).sender_line1, positions[(str + i) % 6, 0] + 24, positions[(str + i) % 6, 1] + 61, 0);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).sender_line2, positions[(str + i) % 6, 0] + 24, positions[(str + i) % 6, 1] + 51, 0);
 
-                    cb.SetFontAndSize(bfChinese, 12);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).addressee_line1, positions[(str + i) % 6, 0] + 26, positions[(str + i) % 6, 1] + 155, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).addressee_line2, positions[(str + i) % 6, 0] + 26, positions[(str + i) % 6, 1] + 142, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).addressee_line3, positions[(str + i) % 6, 0] + 26, positions[(str + i) % 6, 1] + 129, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).memo_line1, positions[(str + i) % 6, 0] + 26, positions[(str + i) % 6, 1] + 115, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).memo_line2, positions[(str + i) % 6, 0] + 26, positions[(str + i) % 6, 1] + 102, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).memo_line3, positions[(str + i) % 6, 0] + 26, positions[(str + i) % 6, 1] + 89, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).sender_line1, positions[(str + i) % 6, 0] + 26, positions[(str + i) % 6, 1] + 75, 0);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).sender_line2, positions[(str + i) % 6, 0] + 26, positions[(str + i) % 6, 1] + 62, 0);
-
-                    cb.SetFontAndSize(bfChinese, 25);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[i]).bag + " 號袋", positions[(str + i) % 6, 0] + 15, positions[(str + i) % 6, 1] + 22, 0);
+                    cb.SetFontAndSize(bfChinese, 14);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_CENTER, ((Para)barcode[j]).bag + " 號袋", positions[(str + i) % 6, 0] + 43, positions[(str + i) % 6, 1] + 16, 0);
                     cb.EndText();
                     System.IO.MemoryStream img_barcode = null;
                     iTextSharp.text.Image img = null;
+                                 
+                    cb.SetFontAndSize(bfChinese, 7);
                     //圖片 96
-                    if(((Para)barcode[i]).barcode96.Length>0){
+                    if(((Para)barcode[j]).barcode96.Length>0){
 	                    img_barcode = new System.IO.MemoryStream();
-	                    GetCode39(((Para)barcode[i]).barcode96).Save(img_barcode, System.Drawing.Imaging.ImageFormat.Bmp);
+	                    GetCode39(((Para)barcode[j]).barcode96).Save(img_barcode, System.Drawing.Imaging.ImageFormat.Bmp);
 	                    img = iTextSharp.text.Image.GetInstance(img_barcode.ToArray());
-	                    img.SetAbsolutePosition(positions[(str + i) % 6, 0] + 105, positions[(str + i) % 6, 1] + 177);
+	                    img.SetAbsolutePosition(positions[(str + i) % 6, 0] + 144, positions[(str + i) % 6, 1] + 141);
 	                    doc1.Add(img);
                    	}
+                   	cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).barcode96, positions[(str + i) % 6, 0] + 197, positions[(str + i) % 6, 1] + 134, 0);                   
                     //圖片 97
-                    if(((Para)barcode[i]).barcode97.Length>0){
+                    if(((Para)barcode[j]).barcode97.Length>0){
 	                    img_barcode = new System.IO.MemoryStream();
-	                    GetCode39(((Para)barcode[i]).barcode97).Save(img_barcode, System.Drawing.Imaging.ImageFormat.Bmp);
+	                    GetCode39(((Para)barcode[j]).barcode97).Save(img_barcode, System.Drawing.Imaging.ImageFormat.Bmp);
 	                    img = iTextSharp.text.Image.GetInstance(img_barcode.ToArray());
-	                    img.SetAbsolutePosition(positions[(str + i) % 6, 0] + 105, positions[(str + i) % 6, 1] + 17);
+	                    img.SetAbsolutePosition(positions[(str + i) % 6, 0] + 116, positions[(str + i) % 6, 1] + 16);
 	                    doc1.Add(img);
-                    }
+                    }  
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_LEFT, ((Para)barcode[j]).barcode97, positions[(str + i) % 6, 0] + 172, positions[(str + i) % 6, 1] + 9, 0);           
                 }
             }
             doc1.Close();
@@ -254,7 +295,7 @@
             int y = 0; //上邊界
             int WidLength = 2; //粗BarCode長度
             int NarrowLength = 1; //細BarCode長度
-            int BarCodeHeight = 25; //BarCode高度
+            int BarCodeHeight = 20; //BarCode高度
             int intSourceLength = strSource.Length;
             string strEncode = "010010100"; //編碼字串 初值為 起始符號 *
 
