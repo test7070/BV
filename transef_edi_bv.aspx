@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 	<head>
-		<title></title>
+		<title> </title>
 		<script src="../script/jquery.min.js" type="text/javascript"></script>
 		<script src='../script/qj2.js' type="text/javascript"></script>
 		<script src='qset.js' type="text/javascript"></script>
@@ -41,13 +41,14 @@
                 load : function(){
                     var string = "<table id='vcc_table' style='width:1250px;'>";
                     string+='<tr id="vcc_header">';
+                    string+='<td class="transef_del" align="center" style="width:35px; color:black;display:none;">刪</td>';
                     string+='<td id="vcc_chk" align="center" style="width:20px; color:black;">選</td>';
                     string+='<td id="vcc_noa" onclick="vcc.sort(\'noa\',false)" title="上傳編號" align="center" style="width:120px; color:black;display:none;">上傳編號</td>';
-                    string+='<td id="vcc_memo" onclick="vcc.sort(\'memo\',false)" title="上傳檔案" align="center" style="width:120px; color:black;">上傳檔案</td>';
-                    string+='<td id="vcc_datea" onclick="vcc.sort(\'datea\',false)" title="上傳日期" align="center" style="width:80px; color:black;">上傳日期</td>';
-                    string+='<td id="vcc_datea" onclick="vcc.sort(\'datea\',false)" title="時間" align="center" style="width:80px; color:black;">時間</td>';
-                    string+='<td id="vcc_custno" onclick="vcc.sort(\'custno\',false)" title="客戶代號" align="center" style="width:150px; color:black;">客戶代號</td>';
-                    string+='<td id="vcc_comp" onclick="vcc.sort(\'comp\',false)" title="客戶簡稱" align="center" style="width:150px; color:black;">客戶簡稱</td>';
+                    string+='<td id="vcc_memo" onclick="vcc.sort(\'memo\',false)" title="上傳檔案" align="center" style="color:black;">上傳檔案</td>';
+                    string+='<td id="vcc_datea" onclick="vcc.sort(\'datea\',false)" title="上傳日期" align="center" style="width:125px; color:black;">上傳日期</td>';
+                    string+='<td id="vcc_datea" onclick="vcc.sort(\'datea\',false)" title="時間" align="center" style="width:125px; color:black;">時間</td>';
+                    string+='<td id="vcc_custno" onclick="vcc.sort(\'custno\',false)" title="客戶代號" align="center" style="width:220px; color:black;">客戶代號</td>';
+                    string+='<td id="vcc_comp" onclick="vcc.sort(\'comp\',false)" title="客戶簡稱" align="center" style="width:220px; color:black;">客戶簡稱</td>';
                     string+='<td id="vcc_mount" onclick="vcc.sort(\'mount\',true)" title="筆數" align="center" style="width:100px; color:black;">筆數</td>';
                     string+='<td id="vcc_ordeno" onclick="vcc.sort(\'ordeno\',false)" title="總表" align="center" style="width:100px; color:black;">總表</td>';
                     string+='</tr>';
@@ -55,6 +56,7 @@
                     var t_color = ['DarkBlue','DarkRed'];
                     for(var i=0;i<this.tbCount;i++){
                         string+='<tr id="vcc_tr'+i+'">';
+                        string+='<td class="transef_del" style="text-align: center; font-weight: bolder; color:black;display:none;"><input id="btnVcc_'+i+'" type="button" value="-" class="delvcc"></td>';
                         string+='<td style="text-align: center;"><input id="vcc_chk'+i+'" class="vcc_chk" type="checkbox"/></td>';
                         string+='<td id="vcc_noa'+i+'" style="text-align: center;display:none;color:'+t_color[i%t_color.length]+'"></td>';
                         string+='<td id="vcc_memo'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'"></td>';
@@ -101,6 +103,17 @@
                         var t_where="where=^^treno='"+$('#vcc_noa'+n).text()+"' ^^";
 						q_gt('view_transef', t_where, 0, 0, 0,'show_transef', r_accy);
                         $('#transef').html('');
+                    });
+                    
+                    $('.delvcc').unbind("click");
+                    $('.delvcc').click(function(e) {
+                        var n=$(this).attr('id').split('_')[1];
+	                    var t_vccno=$('#vcc_noa'+n).text();
+	                    if(t_vccno.length>0){//刪除vcc
+	                    	if(confirm("確認要刪除 "+$('#vcc_comp'+n).text()+" "+$('#vcc_memo'+n).text()+" ?")){
+	                    		q_func('qtxt.query.delvcc', 'tboat.txt,deletevcc,' +encodeURI(r_accy)+';'+encodeURI(t_vccno));
+	                    	}	                    			
+	                    }
                     });
                     
                     this.data = new Array();
@@ -306,6 +319,7 @@
 						transef_count=as.length;
 						var string = "<table id='transef_table' style='width:2400px;'>";
 	                    string+='<tr id="transef_header">';
+	                    string+='<td class="transef_del" align="center" style="width:35px; color:black;display:none;">刪</td>';
 	                    string+='<td id="transef_sel" align="center" style="width:20px; color:black;"></td>';
 	                    string+='<td id="transef_boatname" align="center" style="width:160px; color:black;">97條碼</td>';
 	                    string+='<td id="transef_po" align="center" style="width:160px; color:black;">96條碼</td>';
@@ -329,6 +343,7 @@
 	                    var t_color = ['DarkBlue','DarkRed'];
 	                    for(var i=0;i<as.length;i++){
 	                        string+='<tr id="vcc_tr'+i+'">';
+	                        string+='<td class="transef_del" style="text-align: center; font-weight: bolder; color:black;display:none;"><input id="btnTransefdel_'+i+'" type="button" value="-" class="deltransef"></td>';
 	                        string+='<td style="text-align: center; font-weight: bolder; color:black;">'+(i+1)+'</td>';
 	                        string+='<td id="transef_boatname'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].boatname+'</td>';
 	                        string+='<td id="transef_po'+i+'" style="text-align: center;color:'+t_color[i%t_color.length]+'">'+as[i].po+'</td>';
@@ -352,6 +367,23 @@
 	                    string+='</table>';
 	                    
 	                    $('#transef').html(string);
+	                    
+	                    if(r_outs==1)
+	                    	$('.transef_del').hide();
+	                   	else{
+	                    	$('.transef_del').show();
+	                    	
+	                    	$('.deltransef').unbind("click");
+	                    	$('.deltransef').click(function() {
+	                    		var n=$(this).attr('id').split('_')[1];
+	                    		var t_code97=$('#transef_boatname'+n).text();
+	                    		if(t_code97.length>0){//刪除97碼
+	                    			if(confirm("確認要刪除 "+t_code97+" ?")){
+	                    				q_func('qtxt.query.del97', 'tboat.txt,deletetransef,' +encodeURI(r_accy)+';'+encodeURI(t_code97));
+	                    			}	                    			
+	                    		}
+							});
+	                    }
 						break;
                     case 'aaa':
                         var GG = _q_appendData("view_vcc", "", true);
@@ -382,7 +414,20 @@
 			
 			function q_funcPost(t_func, result) {
                 switch(t_func) {
-                	
+                	case 'qtxt.query.delvcc':
+                		//刪除完 重刷 vcc
+                		$('#btnVcc_refresh').click();
+                		break;                		
+                	case 'qtxt.query.del97':
+						//刪除完 重刷 transef
+						var chk_name='';
+						$('.vcc_chk').each(function(index) {
+							if($(this).prop('checked')){
+						  		chk_name=$(this).attr('id');
+							}
+						});
+						$('#'+chk_name).click().prop('checked', true);
+						break;
                 }
 			}
 			

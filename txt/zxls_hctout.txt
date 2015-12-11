@@ -20,7 +20,7 @@ set @timea=left(convert(varchar(10), GETDATE(), 108),5)
 
 --新流水號取5碼
 declare @noa nvarchar(20)='FK'+REPLACE(@datea,'/','')
-set @noa=isnull(right((select MAX(noa) from borrc where noa like '%'+@noa),5),'00000')
+set @noa=isnull(right((select MAX(noa) from borrc where noa like @noa+'%'),5),'00000')
 
 insert borrc(noa,custno,comp,datea,nick,salesno,checkno,money,memo)
 select 'FK'+REPLACE(@datea,'/','')+right('00000'+cast(CAST(@noa as int)+ROW_NUMBER() over (order by noa) as nvarchar(10)),5)

@@ -61,7 +61,7 @@
 						name : 'xcustno',
 						dbf : 'cust',
 						index : 'noa,comp',
-						src : 'comp_b.aspx'
+						src : 'cust_b.aspx'
 					}]
                 });
                 q_popAssign();
