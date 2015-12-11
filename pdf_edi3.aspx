@@ -142,6 +142,9 @@
                     cb.SetLineWidth(1);
                     //橫線
                     if(i % 2 == 0){
+                    	cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 280);
+	                    cb.LineTo(positions[(str + i) % 6, 0] + 316, positions[(str + i) % 6, 1] + 280);
+	                    cb.Stroke();
                     	cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 245);
 	                    cb.LineTo(positions[(str + i) % 6, 0] + 316, positions[(str + i) % 6, 1] + 245);
 	                    cb.Stroke();
@@ -170,6 +173,9 @@
 	                    cb.LineTo(positions[(str + i) % 6, 0] + 316, positions[(str + i) % 6, 1] + 7);
 	                    cb.Stroke();
                     }else{
+                    	cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 280);
+	                    cb.LineTo(positions[(str + i) % 6, 0] + 300, positions[(str + i) % 6, 1] + 280);
+	                    cb.Stroke();
                     	cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 245);
 	                    cb.LineTo(positions[(str + i) % 6, 0] + 300, positions[(str + i) % 6, 1] + 245);
 	                    cb.Stroke();
@@ -200,7 +206,7 @@
                     }
                                     
                     //直線
-                    cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 245);
+                    cb.MoveTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 280);
                     cb.LineTo(positions[(str + i) % 6, 0] + 8, positions[(str + i) % 6, 1] + 7);
                     cb.Stroke();
                     cb.MoveTo(positions[(str + i) % 6, 0] + 80, positions[(str + i) % 6, 1] + 245);
@@ -216,7 +222,7 @@
                     cb.LineTo(positions[(str + i) % 6, 0] + 80, positions[(str + i) % 6, 1] + 7);
                     cb.Stroke();
                     if(i % 2 == 0){
-                    	cb.MoveTo(positions[(str + i) % 6, 0] + 316, positions[(str + i) % 6, 1] + 245);
+                    	cb.MoveTo(positions[(str + i) % 6, 0] + 316, positions[(str + i) % 6, 1] + 280);
 	                    cb.LineTo(positions[(str + i) % 6, 0] + 316, positions[(str + i) % 6, 1] + 7);
 	                    cb.Stroke();
                     }                    
@@ -227,12 +233,11 @@
 	                    cb.MoveTo(positions[(str + i) % 6, 0] + 245, positions[(str + i) % 6, 1] + 153);
 	                    cb.LineTo(positions[(str + i) % 6, 0] + 245, positions[(str + i) % 6, 1] + 39);
 	                    cb.Stroke();
-	                    cb.MoveTo(positions[(str + i) % 6, 0] + 300, positions[(str + i) % 6, 1] + 245);
+	                    cb.MoveTo(positions[(str + i) % 6, 0] + 300, positions[(str + i) % 6, 1] + 280);
 	                    cb.LineTo(positions[(str + i) % 6, 0] + 300, positions[(str + i) % 6, 1] + 7);
 	                    cb.Stroke();
                     }
                     
-
                     //TEXT
                     cb.SetColorFill(iTextSharp.text.BaseColor.BLACK);
                     cb.BeginText();
@@ -275,8 +280,8 @@
                     //cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_RIGHT, "KG", positions[(str + i) % 6, 0] + 55, positions[(str + i) % 6, 1] + 175, 0);
                     cb.SetFontAndSize(bfChinese, 12);
                     cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_RIGHT, ((Para)barcode[j]).count.ToString(), positions[(str + i) % 6, 0] + 132, positions[(str + i) % 6, 1] + 165, 0);
-                    cb.SetFontAndSize(bfNumber, 40);
-                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_CENTER, ((Para)barcode[j]).s3, positions[(str + i) % 6, 0] + 225 - k, positions[(str + i) % 6, 1] + 200, 0);
+                    cb.SetFontAndSize(bfNumber, 50);
+                    cb.ShowTextAligned(iTextSharp.text.pdf.PdfContentByte.ALIGN_CENTER, ((Para)barcode[j]).s3, positions[(str + i) % 6, 0] + 225 - k, positions[(str + i) % 6, 1] + 196, 0);
                     
 
                     cb.SetFontAndSize(bfChinese, 10);
