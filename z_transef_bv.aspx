@@ -143,7 +143,7 @@
 				});
 				
 				$('#qReport').click(function(){
-					if($('#qReport').data('info').radioIndex==0 || $('#qReport').data('info').radioIndex==2){
+					if($('#qReport').data('info').radioIndex!=1){
 						$('.prt').hide();
 						$('.vcc').show();
 						$('.download').show();
